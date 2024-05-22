@@ -1,6 +1,5 @@
 "use client";
 
-import * as React from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -16,13 +15,15 @@ import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 import { Stack } from "@mui/material";
 import Link from "next/link";
+import { getUserInfo, isLoggedIn } from "@/actions/authServices";
+import { useState } from "react";
+import { useGetSingleUserQuery } from "@/redux/api/userApi";
 
-const pages = ["Products", "Pricing", "Blog"];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
 function Navbar() {
-  const [anchorElNav, setAnchorElNav] = React.useState(null);
-  const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const [anchorElNav, setAnchorElNav] = useState(null);
+  const [anchorElUser, setAnchorElUser] = useState(null);
 
   const handleOpenNavMenu = (event: any) => {
     setAnchorElNav(event.currentTarget);
@@ -38,6 +39,12 @@ function Navbar() {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+
+  // const loggedIn = false
+  const loggedIn = isLoggedIn();
+  const {data} = useGetSingleUserQuery({});
+  console.log(data);
+
 
   return (
     <Container>
@@ -96,13 +103,21 @@ function Navbar() {
                   display: { xs: "block", md: "none" },
                 }}
               >
-                <Box className="space-y-2" sx={{
-                    margin: "10px"
-                }}>
+                <Box
+                  className="space-y-2"
+                  sx={{
+                    margin: "10px",
+                  }}
+                >
                   <Typography>Home</Typography>
                   <Typography>About US</Typography>
-                  <Typography><Link href={"/login"}>Login</Link></Typography>
-                  <Typography>My Profile</Typography>
+                  {loggedIn ? (
+                    <Typography>My Profile</Typography>
+                  ) : (
+                    <Typography>
+                      <Link href={"/login"}>Login</Link>
+                    </Typography>
+                  )}
                 </Box>
               </Menu>
             </Box>
@@ -134,15 +149,20 @@ function Navbar() {
               <Stack direction={"row"} gap={8}>
                 <Typography>Home</Typography>
                 <Typography>About US</Typography>
-                <Typography><Link href={"/login"}>Login</Link></Typography>
-                <Typography>My Profile</Typography>
+                {loggedIn ? (
+                  <Typography>My Profile</Typography>
+                ) : (
+                  <Typography>
+                    <Link href={"/login"}>Login</Link>
+                  </Typography>
+                )}
               </Stack>
             </Box>
 
             <Box sx={{ flexGrow: 0 }}>
               <Tooltip title="Open settings">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                  <Avatar alt="Remy Sharp" src={data?.image} />
                 </IconButton>
               </Tooltip>
               <Menu

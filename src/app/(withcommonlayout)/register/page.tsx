@@ -1,4 +1,5 @@
 "use client";
+
 import BDDatePicker from "@/components/Forms/BDDatePicker";
 import BDForm from "@/components/Forms/BDFrom";
 import BDInput from "@/components/Forms/BDInput";
@@ -14,20 +15,61 @@ import {
 } from "@mui/material";
 import Link from "next/link";
 import { FieldValues } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { userSchema } from "@/zodValidation/register";
+import { dateFormatter } from "@/utils/dateFormatter";
+import { toast } from "sonner";
+import { registerUser } from "@/actions/register";
+import { userLogin } from "@/actions/login";
+import { storeUserInfo } from "@/actions/authServices";
+import { useRouter } from "next/navigation";
 
-export const defaultValues = {
+const defaultValues = {
+  name: "",
+  email: "",
+  userName: "",
   password: "",
-  patient: {
-    name: "",
-    email: "",
-    contactNumber: "",
-    address: "",
-  },
+  confirmPassword: "",
+  image: "",
+  contactNo: "",
+  bloodType: "A_POSITIVE",
+  location: "",
+  availability: "yes"
 };
-
 const RegisterPage = () => {
+  const router = useRouter();
+
   const handleRegister = async (values: FieldValues) => {
+    
+    values.lastDonationDate = dateFormatter(values.lastDonationDate);
+
+    // Convert availability to boolean based on 'yes' and 'no'
+    if (values.availability === "yes") {
+      values.availability = true;
+    } else if (values.availability === "no") {
+      values.availability = false;
+    }
+
     console.log(values);
+
+    try {
+      const res = await registerUser(values);
+
+      if (res?.data?.id) {
+        toast.success(res?.message);
+        const result = await userLogin({
+          password: values.password,
+          email: values.email,
+        });
+        if (result?.data?.token) {
+          storeUserInfo({ token: result?.data?.token });
+          router.push("/");
+        }
+      }
+    } catch (error: any) {
+      console.error(error?.message);
+      toast.error(error?.message);
+    }
   };
   return (
     <Container>
@@ -65,10 +107,14 @@ const RegisterPage = () => {
           </Stack>
 
           <Box>
-            <BDForm onSubmit={handleRegister} defaultValues={defaultValues}>
+            <BDForm
+              onSubmit={handleRegister}
+              // resolver={zodResolver(userSchema)}
+              defaultValues={defaultValues}
+            >
               <Grid container spacing={2} my={1}>
                 <Grid item md={12}>
-                  <BDInput label="Name" fullWidth={true} name="patient.name" />
+                  <BDInput label="Name" fullWidth={true} name="name" />
                 </Grid>
                 <Grid item md={6}>
                   <BDInput
@@ -76,6 +122,7 @@ const RegisterPage = () => {
                     type="email"
                     fullWidth={true}
                     name="email"
+                    required
                   />
                 </Grid>
                 <Grid item md={6}>
@@ -84,6 +131,7 @@ const RegisterPage = () => {
                     type="text"
                     fullWidth={true}
                     name="userName"
+                    required
                   />
                 </Grid>
                 <Grid item md={6}>
@@ -92,6 +140,7 @@ const RegisterPage = () => {
                     type="password"
                     fullWidth={true}
                     name="password"
+                    required
                   />
                 </Grid>
                 <Grid item md={6}>
@@ -100,14 +149,25 @@ const RegisterPage = () => {
                     type="password"
                     fullWidth={true}
                     name="confirmPassword"
+                    required
                   />
                 </Grid>
                 <Grid item md={6}>
                   <BDInput
                     label="Contact Number"
-                    type="tel"
+                    type="text"
                     fullWidth={true}
-                    name="contactNumber"
+                    name="contactNo"
+                    required
+                  />
+                </Grid>
+                <Grid item md={6}>
+                  <BDInput
+                    label="Image"
+                    type="text"
+                    fullWidth={true}
+                    name="image"
+                    required
                   />
                 </Grid>
                 <Grid item md={6}>
@@ -115,27 +175,29 @@ const RegisterPage = () => {
                 </Grid>
                 <Grid item md={6}>
                   <BDSelectInput
-                    items={["Yes", "No"]}
+                    items={["yes", "no"]}
                     label="Availablity"
                     fullWidth={true}
-                    name="availablity"
+                    name="availability"
+                    required
                   />
                 </Grid>
                 <Grid item md={6}>
                   <BDSelectInput
-                  items={[
-                    "A_POSITIVE",
-                    "A_NEGATIVE",
-                    "B_POSITIVE",
-                    "B_NEGATIVE",
-                    "AB_POSITIVE",
-                    "AB_NEGATIVE",
-                    "O_POSITIVE",
-                    "O_NEGATIVE",
-                  ]}
+                    items={[
+                      "A_POSITIVE",
+                      "A_NEGATIVE",
+                      "B_POSITIVE",
+                      "B_NEGATIVE",
+                      "AB_POSITIVE",
+                      "AB_NEGATIVE",
+                      "O_POSITIVE",
+                      "O_NEGATIVE",
+                    ]}
                     label="Blood Type"
                     fullWidth={true}
                     name="bloodType"
+                    required
                   />
                 </Grid>
                 <Grid item md={6}>
@@ -143,6 +205,7 @@ const RegisterPage = () => {
                     label="Last Donation Date"
                     fullWidth={true}
                     name="lastDonationDate"
+                    required
                   />
                 </Grid>
               </Grid>

@@ -1,14 +1,32 @@
 "use client";
 
+import { storeUserInfo } from "@/actions/authServices";
+import { userLogin } from "@/actions/login";
 import BDForm from "@/components/Forms/BDFrom";
 import BDInput from "@/components/Forms/BDInput";
 import { Box, Button, Container, Grid, Stack, Typography } from "@mui/material";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { FieldValues } from "react-hook-form";
+import { toast } from "sonner";
 
 const LoginPage = () => {
-  const handleLogin = (values: FieldValues) => {
+  const router = useRouter();
+  const handleLogin = async (values: FieldValues) => {
     console.log(values);
+    try {
+      const res = await userLogin(values);
+      if (res?.data?.token) {
+        toast.success(res?.message);
+        storeUserInfo({ token: res?.data?.token });
+        router.push("/");
+      } else {
+        // setError(res.message);
+        console.log(res);
+      }
+    } catch (err: any) {
+      console.error(err.message);
+    }
   };
   return (
     <Container>
@@ -98,15 +116,13 @@ const LoginPage = () => {
                   margin: "10px 0px",
                   backgroundColor: "primary.main",
                   color: "white",
-                  '&:hover': {
-                    backgroundColor: 'primary.dark',
-                    color: 'white',
+                  "&:hover": {
+                    backgroundColor: "primary.dark",
+                    color: "white",
                   },
                 }}
                 fullWidth={true}
                 type="submit"
-
-
               >
                 Login
               </Button>
