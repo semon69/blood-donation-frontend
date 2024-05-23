@@ -53,7 +53,6 @@ function Navbar() {
   // const loggedIn = false
   const loggedIn = isLoggedIn();
   const { data } = useGetSingleUserQuery({});
-  // console.log(data);
 
   return (
     <Container
@@ -131,7 +130,7 @@ function Navbar() {
                   </Typography>
                   {loggedIn ? (
                     <Typography>
-                      <Link href={"/dashboard"}>My Profile</Link>
+                      <Link href={`/dashboard/${data?.role}`}>My Profile</Link>
                     </Typography>
                   ) : (
                     <Typography>
@@ -198,7 +197,7 @@ function Navbar() {
                       fontSize: "18px",
                     }}
                   >
-                    <Link href={"/dashboard"}>My Profile</Link>
+                    <Link href={`/dashboard/${data?.role}`}>My Profile</Link>
                   </Typography>
                 ) : (
                   <Typography
