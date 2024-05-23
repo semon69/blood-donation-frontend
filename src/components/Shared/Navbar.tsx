@@ -18,6 +18,8 @@ import Link from "next/link";
 import { getUserInfo, isLoggedIn } from "@/actions/authServices";
 import { useState } from "react";
 import { useGetSingleUserQuery } from "@/redux/api/userApi";
+import logo from "../../assets/logo.jpg"
+import Image from "next/image";
 
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
@@ -42,12 +44,13 @@ function Navbar() {
 
   // const loggedIn = false
   const loggedIn = isLoggedIn();
-  const {data} = useGetSingleUserQuery({});
+  const { data } = useGetSingleUserQuery({});
   console.log(data);
 
-
   return (
-    <Container>
+    <Container sx={{
+      marginY: "10px"
+    }}>
       <AppBar
         position="static"
         color="transparent"
@@ -60,9 +63,8 @@ function Navbar() {
               variant="h6"
               noWrap
               component="a"
-              href="#app-bar-with-responsive-menu"
+              href="/"
               sx={{
-                mr: 2,
                 display: { xs: "none", md: "flex" },
                 fontFamily: "monospace",
                 fontWeight: 700,
@@ -71,7 +73,7 @@ function Navbar() {
                 textDecoration: "none",
               }}
             >
-              LOGO
+              <Image src={logo} alt="image" width={50} height={50}  />
             </Typography>
 
             <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
@@ -107,10 +109,16 @@ function Navbar() {
                   className="space-y-2"
                   sx={{
                     margin: "10px",
+                    fontWeight: 600,
+                    fontSize: "25px",
                   }}
                 >
-                  <Typography>Home</Typography>
-                  <Typography>About US</Typography>
+                  <Typography>
+                    <Link href={"/"}>Home</Link>
+                  </Typography>
+                  <Typography>
+                    <Link href={"/about"}>About Us</Link>
+                  </Typography>
                   {loggedIn ? (
                     <Typography>My Profile</Typography>
                   ) : (
@@ -125,9 +133,9 @@ function Navbar() {
               variant="h5"
               noWrap
               component="a"
-              href="#app-bar-with-responsive-menu"
+              href="/"
               sx={{
-                mr: 2,
+                // mr: 2,
                 display: { xs: "flex", md: "none" },
                 flexGrow: 1,
                 fontFamily: "monospace",
@@ -137,7 +145,7 @@ function Navbar() {
                 textDecoration: "none",
               }}
             >
-              LOGO
+              <Image src={logo} alt="image" width={50} height={50}  />
             </Typography>
             <Box
               sx={{
@@ -147,12 +155,46 @@ function Navbar() {
               }}
             >
               <Stack direction={"row"} gap={8}>
-                <Typography>Home</Typography>
-                <Typography>About US</Typography>
+                <Typography
+                  sx={{
+                    fontWeight: 600,
+                    fontSize: "18px",
+                  }}
+                >
+                  <Link href={"/"}>Home</Link>
+                </Typography>
+                <Typography
+                  sx={{
+                    fontWeight: 600,
+                    fontSize: "18px",
+                  }}
+                >
+                  <Link href={"/about"}>About Us</Link>
+                </Typography>
+                <Typography
+                  sx={{
+                    fontWeight: 600,
+                    fontSize: "18px",
+                  }}
+                >
+                  <Link href={"/searchDonor"}>Search Donor</Link>
+                </Typography>
                 {loggedIn ? (
-                  <Typography>My Profile</Typography>
+                  <Typography
+                    sx={{
+                      fontWeight: 600,
+                      fontSize: "18px",
+                    }}
+                  >
+                    My Profile
+                  </Typography>
                 ) : (
-                  <Typography>
+                  <Typography
+                    sx={{
+                      fontWeight: 600,
+                      fontSize: "18px",
+                    }}
+                  >
                     <Link href={"/login"}>Login</Link>
                   </Typography>
                 )}
@@ -162,7 +204,7 @@ function Navbar() {
             <Box sx={{ flexGrow: 0 }}>
               <Tooltip title="Open settings">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <Avatar alt="Remy Sharp" src={data?.image} />
+                  <Avatar alt="image" src={data?.image} />
                 </IconButton>
               </Tooltip>
               <Menu

@@ -32,16 +32,16 @@ const LoginPage = () => {
     <Container>
       <Stack
         sx={{
-          height: "60vh",
           justifyContent: "center",
           alignItems: "center",
+          margin: "50px"
         }}
       >
         <Box
           sx={{
             maxWidth: 600,
             width: "100%",
-            boxShadow: 2,
+            boxShadow: 1,
             borderRadius: 1,
             p: 4,
             textAlign: "center",
