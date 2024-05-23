@@ -1,8 +1,9 @@
 "use client";
 
 import { useGetSingleUserUsingIdQuery } from "@/redux/api/userApi";
-import { Box, Container, Divider, Typography } from "@mui/material";
+import { Box, Button, Container, Divider, Typography } from "@mui/material";
 import Image from "next/image";
+import Link from "next/link";
 
 type TParams = {
   params: {
@@ -11,10 +12,10 @@ type TParams = {
 };
 
 const DonorDetailsPage = ({ params }: TParams) => {
+  
   const id = params?.id;
-  const { data, isLoading } = useGetSingleUserUsingIdQuery(id);
 
-  console.log(data, "user data");
+  const { data, isLoading } = useGetSingleUserUsingIdQuery(id);
 
   return (
     <Container>
@@ -73,31 +74,37 @@ const DonorDetailsPage = ({ params }: TParams) => {
 
             <Divider></Divider>
 
-            {data?.availability ? (
-              <Box
-                sx={{
-                  marginTop: "10px",
-                  "& > *:not(:last-child)": {
-                    mb: 1,
-                  },
-                }}
-              >
-                <Typography variant="h5" color={"primary.main"}>
-                  Contact Information
+            <Box>
+              {data?.availability ? (
+                <Box
+                  sx={{
+                    marginTop: "10px",
+                    "& > *:not(:last-child)": {
+                      mb: 1,
+                    },
+                  }}
+                >
+                  <Typography variant="h5" color={"primary.main"}>
+                    Contact Information
+                  </Typography>
+                  <Typography variant="h5">
+                    Number:{" "}
+                    <span className="font-medium ml-3">{data?.contactNo}</span>
+                  </Typography>
+                  <Typography variant="h5">
+                    Email:{" "}
+                    <span className="font-medium ml-3">{data?.email}</span>
+                  </Typography>
+                </Box>
+              ) : (
+                <Typography color={"primary.main"}>
+                  This person is Unavailable to donate blood
                 </Typography>
-                <Typography variant="h5">
-                  Number:{" "}
-                  <span className="font-medium ml-3">{data?.contactNo}</span>
-                </Typography>
-                <Typography variant="h5">
-                  Email: <span className="font-medium ml-3">{data?.email}</span>
-                </Typography>
-              </Box>
-            ) : (
-              <Typography color={"primary.main"}>
-                This person is Unavailable to donate blood
-              </Typography>
-            )}
+              )}
+            </Box>
+            <Button>
+              <Link href={`/bloodRequest/${id}`}>Request for Blood</Link>
+            </Button>
           </Box>
         </Box>
       )}

@@ -37,4 +37,8 @@ export const userApi = baseApi.injectEndpoints({
   }),
 });
 
-export const { useGetSingleUserQuery, useGetAllDonorsQuery, useGetSingleUserUsingIdQuery } = userApi;
+export const {
+  useGetSingleUserQuery,
+  useGetAllDonorsQuery,
+  useGetSingleUserUsingIdQuery,
+} = userApi;

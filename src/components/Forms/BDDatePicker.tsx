@@ -34,7 +34,6 @@ const BDDatePicker = ({
             <DesktopDatePicker
               label={label}
               timezone="system"
-              disablePast
               {...field}
               onChange={(date) => onChange(date)}
               value={value || Date.now()}
