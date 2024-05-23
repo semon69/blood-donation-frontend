@@ -25,7 +25,16 @@ export const userApi = baseApi.injectEndpoints({
 
       providesTags: ["user"],
     }),
+
+    getSingleUserUsingId: build.query({
+      query: (id) => ({
+        url: `/donor/${id}`,
+        method: "GET",
+      }),
+
+      providesTags: ["user"],
+    }),
   }),
 });
 
-export const { useGetSingleUserQuery, useGetAllDonorsQuery } = userApi;
+export const { useGetSingleUserQuery, useGetAllDonorsQuery, useGetSingleUserUsingIdQuery } = userApi;

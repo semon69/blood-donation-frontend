@@ -15,15 +15,17 @@ import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 import { Stack } from "@mui/material";
 import Link from "next/link";
-import { getUserInfo, isLoggedIn } from "@/actions/authServices";
+import { getUserInfo, isLoggedIn, removeUser } from "@/actions/authServices";
 import { useState } from "react";
 import { useGetSingleUserQuery } from "@/redux/api/userApi";
-import logo from "../../assets/logo.jpg"
+import logo from "../../assets/logo.jpg";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
+const settings = ["Logout"];
 
 function Navbar() {
+  const router = useRouter();
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
 
@@ -42,15 +44,23 @@ function Navbar() {
     setAnchorElUser(null);
   };
 
+  const handleLogout = () => {
+    removeUser();
+    handleCloseUserMenu();
+    router.push("/login");
+  };
+
   // const loggedIn = false
   const loggedIn = isLoggedIn();
   const { data } = useGetSingleUserQuery({});
-  console.log(data);
+  // console.log(data);
 
   return (
-    <Container sx={{
-      marginY: "10px"
-    }}>
+    <Container
+      sx={{
+        marginY: "10px",
+      }}
+    >
       <AppBar
         position="static"
         color="transparent"
@@ -73,7 +83,7 @@ function Navbar() {
                 textDecoration: "none",
               }}
             >
-              <Image src={logo} alt="image" width={50} height={50}  />
+              <Image src={logo} alt="image" width={50} height={50} />
             </Typography>
 
             <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
@@ -120,7 +130,9 @@ function Navbar() {
                     <Link href={"/about"}>About Us</Link>
                   </Typography>
                   {loggedIn ? (
-                    <Typography>My Profile</Typography>
+                    <Typography>
+                      <Link href={"/dashboard"}>My Profile</Link>
+                    </Typography>
                   ) : (
                     <Typography>
                       <Link href={"/login"}>Login</Link>
@@ -145,7 +157,7 @@ function Navbar() {
                 textDecoration: "none",
               }}
             >
-              <Image src={logo} alt="image" width={50} height={50}  />
+              <Image src={logo} alt="image" width={50} height={50} />
             </Typography>
             <Box
               sx={{
@@ -186,7 +198,7 @@ function Navbar() {
                       fontSize: "18px",
                     }}
                   >
-                    My Profile
+                    <Link href={"/dashboard"}>My Profile</Link>
                   </Typography>
                 ) : (
                   <Typography
@@ -224,7 +236,13 @@ function Navbar() {
                 onClose={handleCloseUserMenu}
               >
                 {settings.map((setting) => (
-                  <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                  <MenuItem
+                    key={setting}
+                    //  onClick={handleCloseUserMenu}
+                    onClick={
+                      setting === "Logout" ? handleLogout : handleCloseUserMenu
+                    }
+                  >
                     <Typography textAlign="center">{setting}</Typography>
                   </MenuItem>
                 ))}
