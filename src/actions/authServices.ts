@@ -21,18 +21,6 @@ export const getUserInfo = () => {
   }
 };
 
-// export const getUserData = async () => {
-//   const token = getFromLocalStorage("token");
-//   const res = await fetch(`http://localhost:5000/api/my-profile`, {
-//     method: "GET",
-//     headers: {
-//       Authorization: `${token}`,
-//     },
-//   });
-//   const user = await res.json();
-//   console.log(user);
-//   return user;
-// };
 
 export const isLoggedIn = () => {
   const authToken = getFromLocalStorage("token");

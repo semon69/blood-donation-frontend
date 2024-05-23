@@ -4,25 +4,16 @@ import BDDatePicker from "@/components/Forms/BDDatePicker";
 import BDForm from "@/components/Forms/BDFrom";
 import BDInput from "@/components/Forms/BDInput";
 import BDSelectInput from "@/components/Forms/BDSelectInput";
-import {
-  Box,
-  Button,
-  Container,
-  Grid,
-  Stack,
-  TextField,
-  Typography,
-} from "@mui/material";
+import { Box, Button, Container, Grid, Stack, Typography } from "@mui/material";
 import Link from "next/link";
 import { FieldValues } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { userSchema } from "@/zodValidation/register";
 import { dateFormatter } from "@/utils/dateFormatter";
 import { toast } from "sonner";
 import { registerUser } from "@/actions/register";
 import { userLogin } from "@/actions/login";
-import { storeUserInfo } from "@/actions/authServices";
+import { getUserInfo, storeUserInfo } from "@/actions/authServices";
 import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
 const defaultValues = {
   name: "",
@@ -34,13 +25,12 @@ const defaultValues = {
   contactNo: "",
   bloodType: "A_POSITIVE",
   location: "",
-  availability: "yes"
+  availability: "yes",
 };
 const RegisterPage = () => {
   const router = useRouter();
 
   const handleRegister = async (values: FieldValues) => {
-    
     values.lastDonationDate = dateFormatter(values.lastDonationDate);
 
     // Convert availability to boolean based on 'yes' and 'no'
@@ -49,8 +39,6 @@ const RegisterPage = () => {
     } else if (values.availability === "no") {
       values.availability = false;
     }
-
-    console.log(values);
 
     try {
       const res = await registerUser(values);
@@ -63,7 +51,8 @@ const RegisterPage = () => {
         });
         if (result?.data?.token) {
           storeUserInfo({ token: result?.data?.token });
-          router.push("/");
+          const { role } = getUserInfo() as any;
+          router.push(`/dashboard/${role}`);
         }
       }
     } catch (error: any) {
@@ -77,7 +66,7 @@ const RegisterPage = () => {
         sx={{
           justifyContent: "center",
           alignItems: "center",
-          margin: "30px"
+          margin: "30px",
         }}
       >
         <Box

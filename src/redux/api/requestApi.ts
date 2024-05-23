@@ -7,11 +7,29 @@ export const requestApi = baseApi.injectEndpoints({
       query: (data) => ({
         url: "/donation-request",
         method: "POST",
-        data
+        data,
       }),
-      invalidatesTags: ["user"],
+      invalidatesTags: ["request"],
+    }),
+    getMyDonationRequest: build.query({
+      query: () => ({
+        url: "/myDonationsRequest",
+        method: "GET",
+      }),
+      providesTags: ["request"],
+    }),
+    donationRequestForMe: build.query({
+      query: () => ({
+        url: "/donationRequestForMe",
+        method: "GET",
+      }),
+      providesTags: ["request"],
     }),
   }),
 });
 
-export const { useCreateRequestMutation } = requestApi;
+export const {
+  useCreateRequestMutation,
+  useGetMyDonationRequestQuery,
+  useDonationRequestForMeQuery,
+} = requestApi;

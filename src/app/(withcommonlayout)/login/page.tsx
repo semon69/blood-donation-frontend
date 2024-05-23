@@ -1,25 +1,27 @@
 "use client";
 
-import { storeUserInfo } from "@/actions/authServices";
+import { getUserInfo, storeUserInfo } from "@/actions/authServices";
 import { userLogin } from "@/actions/login";
 import BDForm from "@/components/Forms/BDFrom";
 import BDInput from "@/components/Forms/BDInput";
 import { Box, Button, Container, Grid, Stack, Typography } from "@mui/material";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 import { FieldValues } from "react-hook-form";
 import { toast } from "sonner";
 
 const LoginPage = () => {
   const router = useRouter();
+
   const handleLogin = async (values: FieldValues) => {
-    console.log(values);
     try {
       const res = await userLogin(values);
       if (res?.data?.token) {
         toast.success(res?.message);
         storeUserInfo({ token: res?.data?.token });
-        router.push("/dashboard");
+        const {role} = getUserInfo() as any;
+        router.push(`/dashboard/${role}`);
       } else {
         // setError(res.message);
         console.log(res);
@@ -34,7 +36,7 @@ const LoginPage = () => {
         sx={{
           justifyContent: "center",
           alignItems: "center",
-          margin: "50px"
+          margin: "50px",
         }}
       >
         <Box
