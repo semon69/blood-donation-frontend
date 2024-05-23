@@ -20,12 +20,13 @@ import { useState } from "react";
 import { useGetSingleUserQuery } from "@/redux/api/userApi";
 import logo from "../../assets/logo.jpg";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 const settings = ["Logout"];
 
 function Navbar() {
   const router = useRouter();
+  const pathname = usePathname();
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
 
@@ -123,10 +124,35 @@ function Navbar() {
                   }}
                 >
                   <Typography>
-                    <Link href={"/"}>Home</Link>
+                    <Link
+                      href={"/"}
+                      style={pathname === "/" ? { color: "red" } : {}}
+                    >
+                      Home
+                    </Link>
                   </Typography>
                   <Typography>
-                    <Link href={"/about"}>About Us</Link>
+                    <Link
+                      href={"/about"}
+                      style={pathname === "/about" ? { color: "red" } : {}}
+                    >
+                      About Us
+                    </Link>
+                  </Typography>
+                  <Typography
+                    sx={{
+                      fontWeight: 600,
+                      fontSize: "18px",
+                    }}
+                  >
+                    <Link
+                      href={"/searchDonor"}
+                      style={
+                        pathname === "/searchDonor" ? { color: "red" } : {}
+                      }
+                    >
+                      Search Donor
+                    </Link>
                   </Typography>
                   {loggedIn ? (
                     <Typography>
@@ -180,7 +206,12 @@ function Navbar() {
                     fontSize: "18px",
                   }}
                 >
-                  <Link href={"/about"}>About Us</Link>
+                  <Link
+                    href={"/about"}
+                    style={pathname === "/about" ? { color: "red" } : {}}
+                  >
+                    About Us
+                  </Link>
                 </Typography>
                 <Typography
                   sx={{
@@ -188,7 +219,12 @@ function Navbar() {
                     fontSize: "18px",
                   }}
                 >
-                  <Link href={"/searchDonor"}>Search Donor</Link>
+                  <Link
+                    href={"/searchDonor"}
+                    style={pathname === "/searchDonor" ? { color: "red" } : {}}
+                  >
+                    Search Donor
+                  </Link>
                 </Typography>
                 {loggedIn ? (
                   <Typography
@@ -206,7 +242,12 @@ function Navbar() {
                       fontSize: "18px",
                     }}
                   >
-                    <Link href={"/login"}>Login</Link>
+                    <Link
+                      href={"/login"}
+                      style={pathname === "/login" ? { color: "red" } : {}}
+                    >
+                      Login
+                    </Link>
                   </Typography>
                 )}
               </Stack>

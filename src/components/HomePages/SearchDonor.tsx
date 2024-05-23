@@ -4,6 +4,7 @@ import DonorCard from "@/components/Donor/DonorCard";
 import { useGetAllDonorsQuery } from "@/redux/api/userApi";
 import {
   Box,
+  Button,
   Container,
   FormControl,
   InputLabel,
@@ -12,6 +13,7 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
+import Link from "next/link";
 import { useState } from "react";
 
 const SearchDonor = () => {
@@ -35,12 +37,16 @@ const SearchDonor = () => {
   //   setAvaiability(null)
 
   return (
-    <Container>
+    <Container
+      sx={{
+        marginY: "60px",
+      }}
+    >
       <Typography
         variant="h4"
         sx={{
           textAlign: "center",
-          // fontWeight: 600,
+          //   fontWeight: 600,
         }}
       >
         Search Blood Donor
@@ -51,7 +57,7 @@ const SearchDonor = () => {
           display: "flex",
           justifyContent: "space-between",
           gap: 8,
-          marginY: "40px"
+          marginY: "40px",
         }}
       >
         <TextField
@@ -79,12 +85,19 @@ const SearchDonor = () => {
         {isLoading ? (
           <Typography>Loading...</Typography>
         ) : (
-          <Box className="grid grid-cols-1 md:grid-cols-4 gap-7">
-            {data?.data?.map((donor: any) => (
+          <Box className="grid grid-cols-4 gap-7">
+            {data?.data?.slice(0, 10).map((donor: any) => (
               <DonorCard key={donor?.id} donor={donor} />
             ))}
           </Box>
         )}
+      </Box>
+      <Box sx={{ display: "flex", justifyContent: "center", marginY: 4 }}>
+        <Button variant="contained">
+          <Link href="/searchDonor"  color="inherit">
+            View All
+          </Link>
+        </Button>
       </Box>
     </Container>
   );
