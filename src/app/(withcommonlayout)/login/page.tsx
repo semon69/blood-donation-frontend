@@ -20,11 +20,12 @@ const LoginPage = () => {
       if (res?.data?.token) {
         toast.success(res?.message);
         storeUserInfo({ token: res?.data?.token });
-        const {role} = getUserInfo() as any;
+        const { role } = getUserInfo() as any;
         router.push(`/dashboard/${role}`);
       } else {
         // setError(res.message);
-        console.log(res);
+        // console.log(res);
+        toast.error(res?.message);
       }
     } catch (err: any) {
       console.error(err.message);

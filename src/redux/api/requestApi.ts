@@ -25,6 +25,14 @@ export const requestApi = baseApi.injectEndpoints({
       }),
       providesTags: ["request"],
     }),
+    updateStatus: build.mutation({
+      query: (data) => ({
+        url: `/donation-request/${data.id}`,
+        method: "PUT",
+        data: data.status
+      }),
+      invalidatesTags: ["request"],
+    }),
   }),
 });
 
@@ -32,4 +40,5 @@ export const {
   useCreateRequestMutation,
   useGetMyDonationRequestQuery,
   useDonationRequestForMeQuery,
+  useUpdateStatusMutation
 } = requestApi;
