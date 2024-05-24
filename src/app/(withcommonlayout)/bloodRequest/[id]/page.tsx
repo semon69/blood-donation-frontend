@@ -75,7 +75,7 @@ const BloodRequestPage = ({ params }: TParams) => {
         sx={{
           justifyContent: "center",
           alignItems: "center",
-          margin: "30px",
+          margin: "60px",
         }}
       >
         <Box

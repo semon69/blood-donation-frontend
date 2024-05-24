@@ -14,6 +14,8 @@ import { userLogin } from "@/actions/login";
 import { getUserInfo, storeUserInfo } from "@/actions/authServices";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { baseApi } from "@/redux/api/baseApi";
 
 const defaultValues = {
   name: "",
@@ -29,6 +31,7 @@ const defaultValues = {
 };
 const RegisterPage = () => {
   const router = useRouter();
+  const dispatch = useDispatch();
 
   const handleRegister = async (values: FieldValues) => {
     values.lastDonationDate = dateFormatter(values.lastDonationDate);
@@ -42,8 +45,8 @@ const RegisterPage = () => {
 
     try {
       const res = await registerUser(values);
-
       if (res?.data?.id) {
+        dispatch(baseApi.util.invalidateTags(["user", "request"]));
         toast.success(res?.message);
         const result = await userLogin({
           password: values.password,

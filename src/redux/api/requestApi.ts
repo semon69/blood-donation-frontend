@@ -9,21 +9,21 @@ export const requestApi = baseApi.injectEndpoints({
         method: "POST",
         data,
       }),
-      invalidatesTags: ["user"],
+      invalidatesTags: ["request"],
     }),
     getMyDonationRequest: build.query({
       query: () => ({
         url: "/myDonationsRequest",
         method: "GET",
       }),
-      providesTags: ["user"],
+      providesTags: ["request"],
     }),
     donationRequestForMe: build.query({
       query: () => ({
         url: "/donationRequestForMe",
         method: "GET",
       }),
-      providesTags: ["user"],
+      providesTags: ["request"],
     }),
     updateStatus: build.mutation({
       query: (data) => ({
@@ -31,7 +31,7 @@ export const requestApi = baseApi.injectEndpoints({
         method: "PUT",
         data: data.status
       }),
-      invalidatesTags: ["user"],
+      invalidatesTags: ["request"],
     }),
   }),
 });

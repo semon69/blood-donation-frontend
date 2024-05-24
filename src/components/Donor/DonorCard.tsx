@@ -12,18 +12,24 @@ export default function DonorCard({ donor }: { donor: any }) {
           borderRadius: "10px",
           boxShadow: 2,
           padding: "15px",
+          height: "420px",
+          // width: "400px"
         }}
       >
         <Box
           sx={{
             borderRadius: "15px",
+            height: "250px",
+            position: "relative",
+            overflow: "hidden",
+            objectFit: "cover"
           }}
         >
           <Image
             src={donor?.image || "https://i.ibb.co/8PmDtj1/jh.jpg"}
+            width={300}
+            height={300}
             alt="image"
-            width={400}
-            height={400}
             style={{
               borderRadius: "15px",
             }}

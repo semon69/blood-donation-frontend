@@ -4,19 +4,23 @@ import { getUserInfo, storeUserInfo } from "@/actions/authServices";
 import { userLogin } from "@/actions/login";
 import BDForm from "@/components/Forms/BDFrom";
 import BDInput from "@/components/Forms/BDInput";
+import { baseApi } from "@/redux/api/baseApi";
 import { Box, Button, Container, Grid, Stack, Typography } from "@mui/material";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { FieldValues } from "react-hook-form";
+import { useDispatch } from "react-redux";
 import { toast } from "sonner";
 
 const LoginPage = () => {
   const router = useRouter();
+  const dispatch = useDispatch()
 
   const handleLogin = async (values: FieldValues) => {
     try {
       const res = await userLogin(values);
       if (res?.data?.token) {
+        dispatch(baseApi.util.invalidateTags(['user', 'request']))
         toast.success(res?.message);
         storeUserInfo({ token: res?.data?.token });
         const { role } = getUserInfo() as any;
@@ -36,7 +40,7 @@ const LoginPage = () => {
         sx={{
           justifyContent: "center",
           alignItems: "center",
-          margin: "50px",
+          marginTop: "30px",
         }}
       >
         <Box

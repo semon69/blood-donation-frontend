@@ -1,5 +1,6 @@
 import { Box, Button, Container, Grid, Stack, Typography } from "@mui/material";
 import Image from "next/image";
+import Link from "next/link";
 
 const HeroSection = () => {
   return (
@@ -20,8 +21,8 @@ const HeroSection = () => {
               connect voluntary blood donors around Bangladesh.
             </Typography>
             <Stack direction={"row"} gap={2}>
-                <Button>Join as Donor</Button>
-                <Button>Search Donor</Button>
+                <Button><Link href={""}>Join As Donor</Link></Button>
+                <Button><Link href={"/searchDonor"}>Search Donor</Link></Button>
             </Stack>
           </Box>
         </Grid>

@@ -12,10 +12,11 @@ type TParams = {
 };
 
 const DonorDetailsPage = ({ params }: TParams) => {
-  
   const id = params?.id;
 
   const { data, isLoading } = useGetSingleUserUsingIdQuery(id);
+
+  // console.log(data);
 
   return (
     <Container>
@@ -29,15 +30,20 @@ const DonorDetailsPage = ({ params }: TParams) => {
             borderRadius: "10px",
             boxShadow: 2,
             padding: "15px",
+            marginY: "30px",
           }}
         >
           <Box
             sx={{
               borderRadius: "15px",
+              height: "450px",
+              position: "relative",
+              overflow: "hidden",
+              objectFit: "contain",
             }}
           >
             <Image
-              src={data?.image || "https://i.ibb.co/8PmDtj1/jh.jpg"}
+              src={data?.image}
               alt="image"
               width={600}
               height={500}

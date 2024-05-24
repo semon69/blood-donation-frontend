@@ -16,7 +16,7 @@ import AdbIcon from "@mui/icons-material/Adb";
 import { Stack } from "@mui/material";
 import Link from "next/link";
 import { getUserInfo, isLoggedIn, removeUser } from "@/actions/authServices";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useGetSingleUserQuery } from "@/redux/api/userApi";
 import logo from "../../assets/logo.jpg";
 import Image from "next/image";
@@ -29,8 +29,14 @@ function Navbar() {
   const pathname = usePathname();
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
+  const [userData, setUserData] = useState<any>({});
+
   const loggedIn = isLoggedIn();
   const { data, isLoading } = useGetSingleUserQuery({});
+
+  useEffect(() => {
+    setUserData(data);
+  }, [data]);
 
   const handleOpenNavMenu = (event: any) => {
     setAnchorElNav(event.currentTarget);
@@ -50,7 +56,9 @@ function Navbar() {
   const handleLogout = () => {
     removeUser();
     handleCloseUserMenu();
+    router.refresh()
     router.push("/login");
+    setUserData(null)
   };
 
   return (
@@ -154,7 +162,7 @@ function Navbar() {
                   </Typography>
                   {loggedIn ? (
                     <Typography>
-                      <Link href={`/dashboard/${data?.role}`}>My Profile</Link>
+                      <Link href={`/dashboard/${userData?.role}`}>My Profile</Link>
                     </Typography>
                   ) : (
                     <Typography>
@@ -254,7 +262,7 @@ function Navbar() {
             <Box sx={{ flexGrow: 0 }}>
               <Tooltip title="Open settings">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <Avatar alt="image" src={data?.image} />
+                  <Avatar alt="image" src={loggedIn ? userData?.image : ""} />
                 </IconButton>
               </Tooltip>
               <Menu
