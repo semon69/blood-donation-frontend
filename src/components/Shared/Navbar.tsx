@@ -29,6 +29,8 @@ function Navbar() {
   const pathname = usePathname();
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
+  const loggedIn = isLoggedIn();
+  const { data, isLoading } = useGetSingleUserQuery({});
 
   const handleOpenNavMenu = (event: any) => {
     setAnchorElNav(event.currentTarget);
@@ -50,10 +52,6 @@ function Navbar() {
     handleCloseUserMenu();
     router.push("/login");
   };
-
-  // const loggedIn = false
-  const loggedIn = isLoggedIn();
-  const { data } = useGetSingleUserQuery({});
 
   return (
     <Container

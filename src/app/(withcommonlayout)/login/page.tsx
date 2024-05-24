@@ -7,7 +7,6 @@ import BDInput from "@/components/Forms/BDInput";
 import { Box, Button, Container, Grid, Stack, Typography } from "@mui/material";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
 import { FieldValues } from "react-hook-form";
 import { toast } from "sonner";
 
@@ -68,18 +67,6 @@ const LoginPage = () => {
             </Box>
           </Stack>
 
-          {/* <Box>
-              <Typography
-                sx={{
-                  backgroundColor: "red",
-                  padding: "1px",
-                  borderRadius: "2px",
-                  color: "white",
-                  marginTop: "5px",
-                }}
-              >
-              </Typography>
-            </Box> */}
 
           <Box>
             <BDForm
