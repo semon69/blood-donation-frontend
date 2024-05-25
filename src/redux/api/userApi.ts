@@ -34,6 +34,15 @@ export const userApi = baseApi.injectEndpoints({
 
       providesTags: ["user"],
     }),
+    updateUser: build.mutation({
+      query: (data) => ({
+        url: `/my-profile`,
+        method: "PATCH",
+        data: data?.values
+      }),
+
+      invalidatesTags: ["user"],
+    }),
   }),
 });
 
@@ -41,4 +50,5 @@ export const {
   useGetSingleUserQuery,
   useGetAllDonorsQuery,
   useGetSingleUserUsingIdQuery,
+  useUpdateUserMutation
 } = userApi;

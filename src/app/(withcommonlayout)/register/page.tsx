@@ -29,6 +29,7 @@ const defaultValues = {
   location: "",
   availability: "yes",
 };
+
 const RegisterPage = () => {
   const router = useRouter();
   const dispatch = useDispatch();

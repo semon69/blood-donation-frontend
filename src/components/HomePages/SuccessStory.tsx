@@ -8,8 +8,8 @@ import {
   Avatar,
   Box,
 } from "@mui/material";
-import "swiper/css";
-import { Swiper, SwiperSlide } from 'swiper/react';
+// import "swiper/css";
+// import { Swiper, SwiperSlide } from 'swiper/react';
 
 const SuccessStories = () => {
   // Fake data for success stories
