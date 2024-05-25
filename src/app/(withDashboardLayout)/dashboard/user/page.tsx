@@ -1,5 +1,6 @@
 "use client";
 
+import { baseApi } from "@/redux/api/baseApi";
 import { useGetSingleUserQuery } from "../../../../redux/api/userApi";
 import {
   Avatar,
@@ -11,6 +12,7 @@ import {
 } from "@mui/material";
 import { styled } from "@mui/system";
 import Link from "next/link";
+import { useDispatch } from "react-redux";
 
 const CardContainer = styled(Card)(({ theme }) => ({
   maxWidth: 600,
@@ -61,6 +63,9 @@ const fadeIn = `
 }`;
 
 const UserPage = () => {
+  const dispatch = useDispatch();
+  dispatch(baseApi.util.invalidateTags(["user", "request"]));
+
   const { data, isLoading } = useGetSingleUserQuery({});
   // console.log(data);
   return (

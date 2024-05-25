@@ -17,6 +17,21 @@ export const userApi = baseApi.injectEndpoints({
       },
       providesTags: ["user"],
     }),
+
+    getAllUsers: build.query({
+      query: () => ({
+        url: "/allUser",
+        method: "GET",
+      }),
+      transformResponse: (response: any, meta: TMeta) => {
+        return {
+          data: response,
+          meta,
+        };
+      },
+      providesTags: ["user"],
+    }),
+
     getSingleUser: build.query({
       query: () => ({
         url: "/my-profile",
@@ -34,11 +49,32 @@ export const userApi = baseApi.injectEndpoints({
 
       providesTags: ["user"],
     }),
+
     updateUser: build.mutation({
       query: (data) => ({
         url: `/my-profile`,
         method: "PATCH",
         data: data?.values
+      }),
+
+      invalidatesTags: ["user"],
+    }),
+
+    updateUserActiveStatus: build.mutation({
+      query: (data) => ({
+        url: `/updateActiveStatus/${data?.id}`,
+        method: "PATCH",
+        data: data?.isActive
+      }),
+
+      invalidatesTags: ["user"],
+    }),
+
+    updateUserRole: build.mutation({
+      query: (data) => ({
+        url: `/updateUserRole/${data?.id}`,
+        method: "PATCH",
+        data: data?.role
       }),
 
       invalidatesTags: ["user"],
@@ -50,5 +86,8 @@ export const {
   useGetSingleUserQuery,
   useGetAllDonorsQuery,
   useGetSingleUserUsingIdQuery,
-  useUpdateUserMutation
+  useUpdateUserMutation,
+  useGetAllUsersQuery,
+  useUpdateUserActiveStatusMutation,
+  useUpdateUserRoleMutation
 } = userApi;
