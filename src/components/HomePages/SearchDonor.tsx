@@ -85,7 +85,7 @@ const SearchDonor = () => {
         {isLoading ? (
           <Typography>Loading...</Typography>
         ) : (
-          <Box className="grid grid-cols-4 gap-7">
+          <Box className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-7">
             {data?.data?.slice(0, 10).map((donor: any) => (
               <DonorCard key={donor?.id} donor={donor} />
             ))}

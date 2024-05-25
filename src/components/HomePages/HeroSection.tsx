@@ -8,7 +8,7 @@ const HeroSection = () => {
         marginY: "30px"
     }}>
       <Grid container spacing={4} justifyContent={"center"} alignItems={"center"}>
-        <Grid item xs={6} >
+        <Grid item xs={12} md={6} >
           <Box>
             <Typography variant="h2">Save Lives</Typography>
             <Typography variant="h2" color={"primary.main"}>Donate Blood!</Typography>
@@ -26,7 +26,7 @@ const HeroSection = () => {
             </Stack>
           </Box>
         </Grid>
-        <Grid item xs={6}>
+        <Grid item xs={12} md={6}>
           <Image
           className="rounded-xl"
             width={520}

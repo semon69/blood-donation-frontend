@@ -4,6 +4,7 @@ import About from "./about/page";
 import CoverageArea from "@/components/HomePages/CoverageArea";
 import { Container } from "@mui/material";
 import SuccessStories from "@/components/HomePages/SuccessStory";
+import DonationTips from "@/components/HomePages/DonationTips";
 
 const HomePage = () => {
   return (
@@ -13,6 +14,7 @@ const HomePage = () => {
       <SearchDonor />
       <CoverageArea />
       <SuccessStories />
+      <DonationTips />
     </Container>
   );
 };

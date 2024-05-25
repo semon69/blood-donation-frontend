@@ -3,7 +3,8 @@
 
 export const userLogin = async (data: any) => {
   const res = await fetch(
-    `${process.env.BACKEND_API_URL}/login`,
+    // `${process.env.BACKEND_API_URL}/login`,
+    "http://localhost:5000/api/login",
     {
       method: "POST",
       headers: {
