@@ -20,12 +20,12 @@ import { useEffect, useState } from "react";
 import { useGetSingleUserQuery } from "@/redux/api/userApi";
 import logo from "../../assets/logo.jpg";
 import Image from "next/image";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 
 const settings = ["Logout"];
 
 function Navbar() {
-  const router = useRouter();
+  // const router = useRouter();
   const pathname = usePathname();
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
@@ -56,8 +56,9 @@ function Navbar() {
   const handleLogout = () => {
     removeUser();
     handleCloseUserMenu();
-    router.refresh()
-    router.push("/login");
+    // router.refresh()
+    // router.push("/login");
+    window.location.href = '/login';
     setUserData(null)
   };
 

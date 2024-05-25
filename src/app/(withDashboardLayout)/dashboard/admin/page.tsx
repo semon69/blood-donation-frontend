@@ -13,6 +13,7 @@ import {
 import { styled } from "@mui/system";
 import Link from "next/link";
 import { useDispatch } from "react-redux";
+import Loading from "@/components/Shared/Loading";
 
 const CardContainer = styled(Card)(({ theme }) => ({
   maxWidth: 600,
@@ -67,6 +68,7 @@ const AdminPage = () => {
   dispatch(baseApi.util.invalidateTags(["user", "request"]));
 
   const { data, isLoading } = useGetSingleUserQuery({});
+
   return (
     <div>
       {!isLoading ? (
@@ -110,7 +112,7 @@ const AdminPage = () => {
           </CardContainer>
         </div>
       ) : (
-        <Typography> Loading...</Typography>
+        <Loading message="Please wait..." />
       )}
     </div>
   );

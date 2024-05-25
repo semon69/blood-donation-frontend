@@ -1,6 +1,7 @@
 "use client";
 
 import DonorCard from "@/components/Donor/DonorCard";
+import Loading from "@/components/Shared/Loading";
 import { useGetAllDonorsQuery } from "@/redux/api/userApi";
 import {
   Box,
@@ -77,7 +78,7 @@ const SearchDonor = () => {
 
       <Box>
         {isLoading ? (
-          <Typography>Loading...</Typography>
+          <Loading message="Data coming..." />
         ) : (
           <Box className="grid grid-cols-1 md:grid-cols-4 gap-7">
             {data?.data?.map((donor: any) => (

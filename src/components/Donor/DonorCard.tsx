@@ -12,14 +12,14 @@ export default function DonorCard({ donor }: { donor: any }) {
           borderRadius: "10px",
           boxShadow: 2,
           padding: "15px",
-          height: "420px",
+          height: "360px",
           // width: "400px"
         }}
       >
         <Box
           sx={{
             borderRadius: "15px",
-            height: "250px",
+            height: "190px",
             position: "relative",
             overflow: "hidden",
             objectFit: "cover"

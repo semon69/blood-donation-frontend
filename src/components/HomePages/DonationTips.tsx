@@ -9,8 +9,10 @@ import {
   Grid,
   Typography,
   Container,
+  Box,
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
+import Image from "next/image";
 
 const tips = [
   {
@@ -31,19 +33,19 @@ const tips = [
   {
     title: "Bring an ID",
     description: "Bring a valid ID with you to the donation center.",
-    image: "https://via.placeholder.com/300x200.png?text=Bring+ID",
+    image: "https://i.ibb.co/KzyQ0bn/id.webp",
   },
   {
     title: "Relax",
     description:
       "Stay calm and relaxed. Listen to music or read a book while donating.",
-    image: "https://via.placeholder.com/300x200.png?text=Relax",
+    image: "https://i.ibb.co/ZhT5HfK/relax.jpg",
   },
   {
     title: "Avoid Heavy Lifting",
     description:
       "Avoid heavy lifting or strenuous exercise for the rest of the day after your donation.",
-    image: "https://via.placeholder.com/300x200.png?text=Avoid+Heavy+Lifting",
+    image: "https://i.ibb.co/nQVfSPz/lifting.jpg",
   },
 ];
 
@@ -67,14 +69,29 @@ const DonationTips = () => {
       <Grid container justifyContent="center" spacing={4}>
         {tips.map((tip, index) => (
           <Grid item key={index} xs={12} sm={6} md={4}>
-            <CardContainer sx={{height: "380px"}}>
+            <CardContainer sx={{ height: "350px" }}>
               <CardMedia
-                component="img"
-                height="150"
-                image={tip.image}
-                alt={tip.title}
               />
               <CardContent>
+                <Box
+                  sx={{
+                    borderRadius: "15px",
+                    height: "210px",
+                    position: "relative",
+                    overflow: "hidden",
+                    objectFit: "cover",
+                  }}
+                >
+                  <Image
+                    src={tip.image}
+                    width={300}
+                    height={300}
+                    alt="image"
+                    style={{
+                      // borderRadius: "15px",
+                    }}
+                  />
+                </Box>
                 <Typography gutterBottom variant="h5" component="div">
                   {tip.title}
                 </Typography>

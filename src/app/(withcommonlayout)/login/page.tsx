@@ -1,6 +1,6 @@
 "use client";
 
-import { getUserInfo, storeUserInfo } from "@/actions/authServices";
+import { getUserInfo, removeUser, storeUserInfo } from "@/actions/authServices";
 import { userLogin } from "@/actions/login";
 import BDForm from "@/components/Forms/BDFrom";
 import BDInput from "@/components/Forms/BDInput";
@@ -14,13 +14,14 @@ import { toast } from "sonner";
 
 const LoginPage = () => {
   const router = useRouter();
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
+  dispatch(baseApi.util.invalidateTags(["user", "request"]));
 
   const handleLogin = async (values: FieldValues) => {
     try {
+      removeUser();
       const res = await userLogin(values);
       if (res?.data?.token) {
-        dispatch(baseApi.util.invalidateTags(['user', 'request']))
         toast.success(res?.message);
         storeUserInfo({ token: res?.data?.token });
         const { role } = getUserInfo() as any;
@@ -70,7 +71,6 @@ const LoginPage = () => {
               </Typography>
             </Box>
           </Stack>
-
 
           <Box>
             <BDForm
