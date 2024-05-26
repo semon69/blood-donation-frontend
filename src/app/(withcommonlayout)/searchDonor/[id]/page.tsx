@@ -1,5 +1,6 @@
 "use client";
 
+import Loading from "@/components/Shared/Loading";
 import { useGetSingleUserUsingIdQuery } from "@/redux/api/userApi";
 import { Box, Button, Container, Divider, Typography } from "@mui/material";
 import Image from "next/image";
@@ -21,7 +22,7 @@ const DonorDetailsPage = ({ params }: TParams) => {
   return (
     <Container>
       {isLoading ? (
-        <Typography> Loading...</Typography>
+        <Loading message="Please wait..." />
       ) : (
         <Box
           sx={{

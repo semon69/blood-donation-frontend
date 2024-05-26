@@ -18,8 +18,8 @@ const Footer = () => {
             <Typography variant="h6" gutterBottom>
               Contact Information
             </Typography>
-            <Typography variant="body1">Email: contact@example.com</Typography>
-            <Typography variant="body1">Phone: (123) 456-7890</Typography>
+            <Typography variant="body1">Email: contact@redlove.com</Typography>
+            <Typography variant="body1">Phone: 01981011331</Typography>
             <Box sx={{ display: "flex", marginTop: "10px" }}>
               <IconButton
                 component={Link}
@@ -78,7 +78,7 @@ const Footer = () => {
               Copyright Information
             </Typography>
             <Typography variant="body1">
-              &copy; 2024 Your Company. All rights reserved.
+              &copy; 2024 RedLove. All rights reserved.
             </Typography>
           </Grid>
         </Grid>

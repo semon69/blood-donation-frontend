@@ -4,8 +4,16 @@ import { isLoggedIn } from "@/actions/authServices";
 import BDDatePicker from "@/components/Forms/BDDatePicker";
 import BDForm from "@/components/Forms/BDFrom";
 import BDInput from "@/components/Forms/BDInput";
-import BDSelectInput from "@/components/Forms/BDSelectInput";
-import { Box, Button, Container, Grid, Stack, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Checkbox,
+  Container,
+  FormControlLabel,
+  Grid,
+  Stack,
+  Typography,
+} from "@mui/material";
 import Link from "next/link";
 import { FieldValues } from "react-hook-form";
 import { dateFormatter } from "@/utils/dateFormatter";
@@ -16,6 +24,7 @@ import {
   useGetSingleUserUsingIdQuery,
 } from "@/redux/api/userApi";
 import { useCreateRequestMutation } from "@/redux/api/requestApi";
+import { useState } from "react";
 
 type TParams = {
   params: {
@@ -24,6 +33,7 @@ type TParams = {
 };
 
 const BloodRequestPage = ({ params }: TParams) => {
+  const [isAgreed, setIsAgreed] = useState(false);
   const id = params?.id;
   const { data: requester, isLoading } = useGetSingleUserQuery({});
   const [createRequest] = useCreateRequestMutation();
@@ -57,16 +67,20 @@ const BloodRequestPage = ({ params }: TParams) => {
       reason: values.reason,
     };
 
-
     try {
       const res = await createRequest(bodyData).unwrap();
       if (res?.id) {
         toast.success("Request make succesfully");
+        router.push("/searchDonor");
       }
     } catch (error: any) {
       console.error(error?.message);
       toast.error(error?.message);
     }
+  };
+
+  const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setIsAgreed(event.target.checked);
   };
 
   return (
@@ -152,12 +166,22 @@ const BloodRequestPage = ({ params }: TParams) => {
                   />
                 </Grid>
               </Grid>
+              <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+                <Checkbox
+                  checked={isAgreed}
+                  onChange={handleCheckboxChange}
+                  required
+                />
+                <Typography>Agreed with term and conditions?</Typography>
+              </Box>
+
               <Button
                 sx={{
                   margin: "10px 0px",
                 }}
                 fullWidth={true}
                 type="submit"
+                disabled={!isAgreed}
               >
                 Send Request
               </Button>

@@ -15,6 +15,7 @@ import {
 } from "@mui/material";
 import Link from "next/link";
 import { useState } from "react";
+import Loading from "../Shared/Loading";
 
 const SearchDonor = () => {
   const query: Record<string, any> = {};
@@ -83,7 +84,7 @@ const SearchDonor = () => {
 
       <Box>
         {isLoading ? (
-          <Typography>Loading...</Typography>
+          <Loading message="please wait..." />
         ) : (
           <Box className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-7">
             {data?.data?.slice(0, 10).map((donor: any) => (

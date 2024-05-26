@@ -1,5 +1,12 @@
 import React from "react";
-import { Container, Typography, Box, Grid, Avatar } from "@mui/material";
+import { Container, Typography, Box, Grid, Avatar, Link } from "@mui/material";
+import {
+  Email,
+  Phone,
+  Facebook,
+  Twitter,
+  Instagram,
+} from "@mui/icons-material";
 
 // Dummy team member data
 const teamMembers = [
@@ -45,7 +52,7 @@ const About = () => {
       </Box>
 
       {teamMembers.length > 0 && (
-        <Box>
+        <Box mb={4}>
           <Typography variant="h5" component="h2" gutterBottom>
             Meet Our Team
           </Typography>
@@ -70,6 +77,44 @@ const About = () => {
           </Grid>
         </Box>
       )}
+
+      <Box textAlign="center" mt={4}>
+        <Typography variant="h5" component="h2" gutterBottom>
+          Contact Information
+        </Typography>
+        <Typography variant="body1" component="p">
+          <Email sx={{ verticalAlign: "middle" }} /> Email:
+          <Link href="mailto:info@redlove.org" sx={{ ml: 1 }}>
+            info@redlove.org
+          </Link>
+        </Typography>
+        <Typography variant="body1" component="p">
+          <Phone sx={{ verticalAlign: "middle" }} /> Phone: (123) 456-7890
+        </Typography>
+        <Box mt={2}>
+          <Link
+            href="https://www.facebook.com/RedLove"
+            target="_blank"
+            sx={{ mx: 1 }}
+          >
+            <Facebook fontSize="large" />
+          </Link>
+          <Link
+            href="https://www.twitter.com/RedLove"
+            target="_blank"
+            sx={{ mx: 1 }}
+          >
+            <Twitter fontSize="large" />
+          </Link>
+          <Link
+            href="https://www.instagram.com/RedLove"
+            target="_blank"
+            sx={{ mx: 1 }}
+          >
+            <Instagram fontSize="large" />
+          </Link>
+        </Box>
+      </Box>
     </Container>
   );
 };

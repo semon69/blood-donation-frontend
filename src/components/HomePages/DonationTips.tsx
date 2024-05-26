@@ -62,7 +62,7 @@ const CardContainer = styled(Card)(({ theme }) => ({
 
 const DonationTips = () => {
   return (
-    <Container sx={{ mt: 5 }}>
+    <Container sx={{ marginY: "50px" }}>
       <Typography variant="h4" component="h1" gutterBottom align="center">
         Donation Tips
       </Typography>

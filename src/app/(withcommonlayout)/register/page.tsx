@@ -108,7 +108,7 @@ const RegisterPage = () => {
             >
               <Grid container spacing={2} my={1}>
                 <Grid item md={12}>
-                  <BDInput label="Name" fullWidth={true} name="name" />
+                  <BDInput label="Name" fullWidth={true} name="name" required />
                 </Grid>
                 <Grid item md={6}>
                   <BDInput
@@ -165,7 +165,12 @@ const RegisterPage = () => {
                   />
                 </Grid>
                 <Grid item md={6}>
-                  <BDInput label="Location" fullWidth={true} name="location" />
+                  <BDInput
+                    label="Location"
+                    fullWidth={true}
+                    name="location"
+                    required
+                  />
                 </Grid>
                 <Grid item md={6}>
                   <BDSelectInput

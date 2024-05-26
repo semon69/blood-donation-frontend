@@ -80,7 +80,7 @@ const SearchDonor = () => {
         {isLoading ? (
           <Loading message="Data coming..." />
         ) : (
-          <Box className="grid grid-cols-1 md:grid-cols-4 gap-7">
+          <Box className="grid grid-cols-1 md:grid-cols-4 gap-7 my-8">
             {data?.data?.map((donor: any) => (
               <DonorCard key={donor?.id} donor={donor} />
             ))}
