@@ -1,36 +1,81 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Blood Donation Platform
 
-## Getting Started
+## Live URL
+[Visit the Blood Donation Platform](http://www.blooddonationplatform.com)
 
-First, run the development server:
+## Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+### Home Page/Landing Page
+- **Header:**
+  - Prominently displayed website logo.
+  - Navigation bar with links to Home, About Us, Login/Register (if not logged in), and My Profile (if logged in).
+- **Hero Section:**
+  - Catchy headline promoting blood donation (e.g., "Save Lives, Donate Blood!").
+  - "Search Donors" button redirecting to the Donor List page with search options.
+- **About Section:**
+  - Brief description of the website's purpose and mission.
+- **Search Blood Donors:**
+  - Search and filter options by blood type, location, and availability.
+  - Display up to 10 recent donor profiles in card format.
+- **Coverage Area:**
+  - Map or list showing areas covered by the blood donation service.
+- **Extra Sections:**
+  - Success stories and testimonials.
+  - Donation tips and guidelines.
+- **Footer:**
+  - Contact information, copyright details, and additional links (Terms of Use, Privacy Policy).
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Login & Registration
+- **Login Form:**
+  - Fields for username or email address and password.
+- **Registration Form:**
+  - Fields for username, email address, password (with confirmation), blood donation option, blood type, and location.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Donor List Page
+- **Features:**
+  - Search and filter options by blood type, location, and availability status.
+  - Donor profiles in card format with pagination.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+### Donor Details Page
+- **Features:**
+  - Detailed information about the donor.
+  - Request Blood button to initiate a request for blood donation.
 
-## Learn More
+### Blood Request Page (Private)
+- **Features:**
+  - Form fields for requester's contact information, additional information (hospital name, date, time), agreement to terms and conditions, and submit button.
 
-To learn more about Next.js, take a look at the following resources:
+### My Profile
+- **User Account Information:**
+  - Options to edit profile details and change password.
+- **Subsections:**
+  - My Blood Requests
+  - Requests for Blood to Me
+  - Change Password
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Admin Dashboard
+- **User Management:**
+  - View and manage user accounts, activate/deactivate accounts, and edit roles.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Technology Used
+- **Frontend:**
+  - HTML, CSS, JavaScript
+  - Frameworks: NextJs
+- **Backend:**
+  - Node.js, Express.js
+- **Database:**
+  - PostgreSQL
+- **Authentication:**
+  - JWT (JSON Web Tokens)
+- **Hosting:**
+  - Vercel
+- **Version Control:**
+  - Git and GitHub
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Setup Instructions
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/semon69/blood-donation-frontend.git
+   cd blood-donation-frontend
+   npm install
+   npm run dev
