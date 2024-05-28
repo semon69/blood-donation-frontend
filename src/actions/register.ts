@@ -2,7 +2,7 @@
 
 export const registerUser = async (data: any) => {
   
-  const res = await fetch(`https://blood-donation-servers.vercel.app/api/register`, {
+  const res = await fetch(`https://blood-donation-backend-five.vercel.app/api/register`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

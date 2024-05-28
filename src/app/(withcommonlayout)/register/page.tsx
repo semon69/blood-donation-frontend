@@ -13,7 +13,6 @@ import { registerUser } from "@/actions/register";
 import { userLogin } from "@/actions/login";
 import { getUserInfo, storeUserInfo } from "@/actions/authServices";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { baseApi } from "@/redux/api/baseApi";
 

@@ -1,7 +1,7 @@
 # Blood Donation Platform
 
 ## Live URL
-[Visit the Blood Donation Platform](http://www.blooddonationplatform.com)
+[Visit the Blood Donation Platform](https://blood-donation-client-nine.vercel.app/)
 
 ## Features
 
