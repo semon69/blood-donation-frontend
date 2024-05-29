@@ -11,6 +11,7 @@ export const userLogin = async (data: any) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(data),
+      credentials: 'include',
       cache: "no-cache"
     }
   );
