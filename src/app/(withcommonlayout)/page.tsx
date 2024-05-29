@@ -8,14 +8,14 @@ import DonationTips from "@/components/HomePages/DonationTips";
 
 const HomePage = () => {
   return (
-    <Container>
+    <>
       <HeroSection />
       <About />
       <SearchDonor />
       <CoverageArea />
       <SuccessStories />
       <DonationTips />
-    </Container>
+    </>
   );
 };
 

@@ -6,6 +6,7 @@ import {
   CardContent,
   CardMedia,
   Box,
+  Container,
 } from "@mui/material";
 import Image from "next/image";
 
@@ -51,55 +52,68 @@ const CoverageArea = () => {
   ];
 
   return (
-    <div className="my-10">
+    <Box>
       <Typography
         variant="h4"
         sx={{
           textAlign: "center",
-          marginY: "30px"
+          marginY: "30px",
         }}
       >
         Coverage Area
       </Typography>
-      <Grid container spacing={2}>
-        {coverageAreaData.map((region) => (
-          <Grid item key={region.id} xs={12} sm={6} md={4}>
-            <Card
-              sx={{
-                height: "350px",
-                borderRadius: "10px",
-              }}
-            >
-              <CardMedia />
-              <CardContent>
-                <Box
-                  sx={{
-                    borderRadius: "15px",
-                    height: "240px",
-                    position: "relative",
-                    overflow: "hidden",
-                    objectFit: "cover",
-                  }}
-                >
-                  <Image
-                    src={region?.image}
-                    alt="Image"
-                    width={400}
-                    height={300}
-                  />
-                </Box>
-                <Typography gutterBottom variant="h5" component="div">
-                  {region.region}
-                </Typography>
-                <Typography variant="body2" color="text.secondary">
-                  Donors: {region.donors}
-                </Typography>
-              </CardContent>
-            </Card>
-          </Grid>
-        ))}
-      </Grid>
-    </div>
+      <Box
+        sx={{
+          backgroundImage: "url(https://i.ibb.co/LkbJ5Nc/cover.jpg)", // Replace with the path to your image
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          padding: "10px",
+        }}
+      >
+        <Container>
+          <div className="my-10">
+            <Grid container spacing={2}>
+              {coverageAreaData.map((region) => (
+                <Grid item key={region.id} xs={12} sm={6} md={4}>
+                  <Card
+                    sx={{
+                      height: "350px",
+                      borderRadius: "10px",
+                    }}
+                  >
+                    <CardMedia />
+                    <CardContent>
+                      <Box
+                        sx={{
+                          borderRadius: "15px",
+                          height: "240px",
+                          position: "relative",
+                          overflow: "hidden",
+                          objectFit: "cover",
+                        }}
+                      >
+                        <Image
+                          src={region?.image}
+                          alt="Image"
+                          width={400}
+                          height={300}
+                        />
+                      </Box>
+                      <Typography gutterBottom variant="h5" component="div">
+                        {region.region}
+                      </Typography>
+                      <Typography variant="body2" color="text.secondary">
+                        Donors: {region.donors}
+                      </Typography>
+                    </CardContent>
+                  </Card>
+                </Grid>
+              ))}
+            </Grid>
+          </div>
+        </Container>
+      </Box>
+    </Box>
   );
 };
 

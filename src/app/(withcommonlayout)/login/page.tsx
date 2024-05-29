@@ -6,11 +6,13 @@ import BDForm from "@/components/Forms/BDFrom";
 import BDInput from "@/components/Forms/BDInput";
 import { baseApi } from "@/redux/api/baseApi";
 import { Box, Button, Container, Grid, Stack, Typography } from "@mui/material";
+import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { FieldValues } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { toast } from "sonner";
+import logo from "../../../assets/logo.jpg";
 
 const LoginPage = () => {
   const router = useRouter();
@@ -61,13 +63,11 @@ const LoginPage = () => {
             }}
           >
             <Box>
-              {/* <Image src={assets.svgs.logo} width={50} height={50} alt="logo" />
-               */}
-              Image
+              <Image src={logo} alt="Logo" width={50} height={50} />
             </Box>
             <Box>
               <Typography variant="h6" fontWeight={600}>
-                Login BD
+                Login
               </Typography>
             </Box>
           </Stack>
@@ -122,7 +122,7 @@ const LoginPage = () => {
               </Button>
               <Typography component="p" fontWeight={300}>
                 <span>{"Don't have an account?"}</span>
-                <Link href="/register">Create an account</Link>
+                <Link href="/register" className="text-red-500 ms-1">Create an account</Link>
               </Typography>
             </BDForm>
           </Box>

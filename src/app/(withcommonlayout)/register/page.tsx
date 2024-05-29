@@ -15,6 +15,8 @@ import { getUserInfo, storeUserInfo } from "@/actions/authServices";
 import { useRouter } from "next/navigation";
 import { useDispatch } from "react-redux";
 import { baseApi } from "@/redux/api/baseApi";
+import Image from "next/image";
+import logo from "../../../assets/logo.jpg";
 
 const defaultValues = {
   name: "",
@@ -89,8 +91,7 @@ const RegisterPage = () => {
             }}
           >
             <Box>
-              {/* <Image src={assets.svgs.logo} width={50} height={50} alt="logo" /> */}
-              Image
+            <Image src={logo} alt="Logo" width={50} height={50} />
             </Box>
             <Box>
               <Typography variant="h6" fontWeight={600}>
@@ -217,7 +218,7 @@ const RegisterPage = () => {
                 Register
               </Button>
               <Typography component="p" fontWeight={300}>
-                Do you already have an account? <Link href="/login">Login</Link>
+                Do you already have an account? <Link href="/login" className="text-red-500">Login</Link>
               </Typography>
             </BDForm>
           </Box>
