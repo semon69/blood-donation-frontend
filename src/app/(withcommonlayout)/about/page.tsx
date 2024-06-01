@@ -31,10 +31,14 @@ const About = () => {
   return (
     <Box
       sx={{
-        // my: 10,
-        py: 10,
+      py: {
+        lg: 10
+      },
         backgroundColor: "primary.main",
-        clipPath: "polygon(0 0, 100% 20%, 100% 100%, 0 80%)",
+        // clipPath: "polygon(0 0, 100% 20%, 100% 100%, 0 80%)",
+        clipPath: {
+          lg: "polygon(0 0, 100% 20%, 100% 100%, 0 80%)",
+        },
       }}
     >
       <Container maxWidth="lg" sx={{ padding: "4rem 0" }}>
@@ -60,7 +64,7 @@ const About = () => {
         </Box>
 
         {teamMembers.length > 0 && (
-          <Box mb={4}>
+          <Box mb={4} sx={{padding: "10px"}}>
             <Typography variant="h5" component="h2" gutterBottom>
               Meet Our Team
             </Typography>
