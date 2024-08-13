@@ -3,11 +3,18 @@
 import { Box, Typography } from "@mui/material";
 import Image from "next/image";
 import Link from "next/link";
+import AOS from "aos";
+import "aos/dist/aos.css";
+import { useEffect } from "react";
 
 export default function DonorCard({ donor }: { donor: any }) {
+  useEffect(() => {
+    AOS.init();
+  }, []);
   return (
     <Link href={`/searchDonor/${donor?.id}`}>
       <Box
+        data-aos="fade-up"
         sx={{
           borderRadius: "10px",
           boxShadow: 2,
@@ -22,7 +29,7 @@ export default function DonorCard({ donor }: { donor: any }) {
             height: "190px",
             position: "relative",
             overflow: "hidden",
-            objectFit: "cover"
+            objectFit: "cover",
           }}
         >
           <Image

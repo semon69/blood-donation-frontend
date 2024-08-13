@@ -1,4 +1,6 @@
-import React from "react";
+"use client"
+
+import React, { useEffect } from "react";
 import {
   Typography,
   Grid,
@@ -9,6 +11,8 @@ import {
   Container,
 } from "@mui/material";
 import Image from "next/image";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const CoverageArea = () => {
   // Fake data for coverage areas with images
@@ -50,7 +54,9 @@ const CoverageArea = () => {
       image: "https://i.ibb.co/CJvJhw7/barishal.jpg",
     },
   ];
-
+  useEffect(() => {
+    AOS.init();
+  }, []);
   return (
     <Box>
       <Typography
@@ -74,7 +80,14 @@ const CoverageArea = () => {
           <div className="my-10">
             <Grid container spacing={2}>
               {coverageAreaData.map((region) => (
-                <Grid item key={region.id} xs={12} sm={6} md={4}>
+                <Grid
+                  data-aos="fade-up"
+                  item
+                  key={region.id}
+                  xs={12}
+                  sm={6}
+                  md={4}
+                >
                   <Card
                     sx={{
                       height: "350px",

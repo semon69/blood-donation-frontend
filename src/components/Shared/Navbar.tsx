@@ -58,8 +58,8 @@ function Navbar() {
     handleCloseUserMenu();
     // router.refresh()
     // router.push("/login");
-    window.location.href = '/login';
-    setUserData(null)
+    window.location.href = "/login";
+    setUserData(null);
   };
 
   return (
@@ -67,6 +67,7 @@ function Navbar() {
       sx={{
         marginY: "10px",
       }}
+      // className="top-0 fixed z-50 w-full"
     >
       <AppBar
         position="static"
@@ -130,7 +131,7 @@ function Navbar() {
                     fontSize: "25px",
                   }}
                 >
-                  <Typography>
+                  <Typography className="border-b-2 border-red-600">
                     <Link
                       href={"/"}
                       style={pathname === "/" ? { color: "red" } : {}}
@@ -163,7 +164,9 @@ function Navbar() {
                   </Typography>
                   {loggedIn ? (
                     <Typography>
-                      <Link href={`/dashboard/${userData?.role}`}>My Profile</Link>
+                      <Link href={`/dashboard/${userData?.role}`}>
+                        My Profile
+                      </Link>
                     </Typography>
                   ) : (
                     <Typography>
@@ -200,6 +203,7 @@ function Navbar() {
             >
               <Stack direction={"row"} gap={8}>
                 <Typography
+                  className="border-b-2 border-red-600"
                   sx={{
                     fontWeight: 600,
                     fontSize: "18px",
@@ -208,6 +212,7 @@ function Navbar() {
                   <Link href={"/"}>Home</Link>
                 </Typography>
                 <Typography
+                  className="border-b-2 border-red-600"
                   sx={{
                     fontWeight: 600,
                     fontSize: "18px",
@@ -221,6 +226,7 @@ function Navbar() {
                   </Link>
                 </Typography>
                 <Typography
+                  className="border-b-2 border-red-600"
                   sx={{
                     fontWeight: 600,
                     fontSize: "18px",
@@ -235,6 +241,7 @@ function Navbar() {
                 </Typography>
                 {loggedIn ? (
                   <Typography
+                    className="border-b-2 border-red-600"
                     sx={{
                       fontWeight: 600,
                       fontSize: "18px",
@@ -244,6 +251,7 @@ function Navbar() {
                   </Typography>
                 ) : (
                   <Typography
+                    className="border-b-2 border-red-600"
                     sx={{
                       fontWeight: 600,
                       fontSize: "18px",
@@ -261,7 +269,7 @@ function Navbar() {
             </Box>
 
             <Box sx={{ flexGrow: 0 }}>
-              <Tooltip title="Open settings">
+              <Tooltip title="Profile Image">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                   <Avatar alt="image" src={loggedIn ? userData?.image : ""} />
                 </IconButton>

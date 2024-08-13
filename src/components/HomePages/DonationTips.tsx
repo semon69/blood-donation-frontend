@@ -1,7 +1,7 @@
 // src/DonationTips.js
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 import {
   Card,
   CardContent,
@@ -13,6 +13,8 @@ import {
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import Image from "next/image";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const tips = [
   {
@@ -61,6 +63,9 @@ const CardContainer = styled(Card)(({ theme }) => ({
 }));
 
 const DonationTips = () => {
+  useEffect(() => {
+    AOS.init();
+  }, []);
   return (
     <Container sx={{ marginY: "50px" }}>
       <Typography variant="h4" component="h1" gutterBottom align="center">
@@ -68,10 +73,9 @@ const DonationTips = () => {
       </Typography>
       <Grid container justifyContent="center" spacing={4}>
         {tips.map((tip, index) => (
-          <Grid item key={index} xs={12} sm={6} md={4}>
+          <Grid data-aos="fade-up" item key={index} xs={12} sm={6} md={4}>
             <CardContainer sx={{ height: "350px" }}>
-              <CardMedia
-              />
+              <CardMedia />
               <CardContent>
                 <Box
                   sx={{
@@ -80,6 +84,9 @@ const DonationTips = () => {
                     position: "relative",
                     overflow: "hidden",
                     objectFit: "cover",
+                    "&:hover img": {
+                      transform: "scale(1.2)", // Adjust the scale value to control zoom
+                    }
                   }}
                 >
                   <Image
@@ -89,6 +96,7 @@ const DonationTips = () => {
                     alt="image"
                     style={{
                       // borderRadius: "15px",
+                      transition: "transform 0.7s ease",
                     }}
                   />
                 </Box>

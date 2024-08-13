@@ -2,17 +2,7 @@
 
 import DonorCard from "@/components/Donor/DonorCard";
 import { useGetAllDonorsQuery } from "@/redux/api/userApi";
-import {
-  Box,
-  Button,
-  Container,
-  FormControl,
-  InputLabel,
-  MenuItem,
-  Select,
-  TextField,
-  Typography,
-} from "@mui/material";
+import { Box, Button, Container, TextField, Typography } from "@mui/material";
 import Link from "next/link";
 import { useState } from "react";
 import Loading from "../Shared/Loading";
@@ -62,12 +52,12 @@ const SearchDonor = () => {
         }}
       >
         <TextField
-          fullWidth
+          className="w-1/2"
           onChange={(e) => setSearchTerm(e.target.value)}
           size="medium"
           placeholder="Search donor by Name, Location, Blood Group"
         />
-        <FormControl fullWidth>
+        {/* <FormControl fullWidth>
           <InputLabel id="demo-simple-select-label">Availabilty</InputLabel>
           <Select
             labelId="demo-simple-select-label"
@@ -79,27 +69,35 @@ const SearchDonor = () => {
             <MenuItem value={"true"}>Yes</MenuItem>
             <MenuItem value={"false"}>No</MenuItem>
           </Select>
-        </FormControl>
+        </FormControl> */}
       </Box>
 
       <Box>
         {isLoading ? (
           <Loading message="please wait..." />
-        ) : (
+        ) : data?.data.length > 0 ? (
           <Box className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-7">
-            {data?.data?.slice(0, 10).map((donor: any) => (
+            {data?.data?.slice(0, 8).map((donor: any) => (
               <DonorCard key={donor?.id} donor={donor} />
             ))}
           </Box>
+        ) : (
+          <>
+            <p>No data found</p>
+          </>
         )}
       </Box>
-      <Box sx={{ display: "flex", justifyContent: "center", marginY: 4 }}>
-        <Button variant="contained">
-          <Link href="/searchDonor"  color="inherit">
-            View All
-          </Link>
-        </Button>
-      </Box>
+      {data?.data?.length < 0 ? (
+        <></>
+      ) : (
+        <Box sx={{ display: "flex", justifyContent: "center", marginY: 4 }}>
+          <Button variant="contained">
+            <Link href="/searchDonor" color="inherit">
+              View All
+            </Link>
+          </Button>
+        </Box>
+      )}
     </Container>
   );
 };
