@@ -325,7 +325,7 @@ function Navbar() {
               <Button>
                 <Link
                   href={"/login"}
-                  style={pathname === "/login" ? { color: "red" } : {}}
+                  // style={pathname === "/login" ? { color: "red" } : {}}
                 >
                   Login
                 </Link>

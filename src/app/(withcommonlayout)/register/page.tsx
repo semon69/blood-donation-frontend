@@ -77,6 +77,7 @@ const RegisterPage = () => {
           justifyContent: "center",
           alignItems: "center",
           margin: "30px",
+          // marginBottom: "50px"
         }}
       >
         <Box
@@ -162,8 +163,8 @@ const RegisterPage = () => {
                 </Grid>
                 <Grid item md={6}>
                   <BDInput
-                    label="Image"
-                    type="file"
+                    label="Image URL"
+                    type="text"
                     fullWidth={true}
                     name="image"
                     required

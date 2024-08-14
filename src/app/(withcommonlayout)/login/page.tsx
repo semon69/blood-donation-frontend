@@ -5,7 +5,15 @@ import { userLogin } from "@/actions/login";
 import BDForm from "@/components/Forms/BDFrom";
 import BDInput from "@/components/Forms/BDInput";
 import { baseApi } from "@/redux/api/baseApi";
-import { Box, Button, Container, Grid, Stack, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Container,
+  Grid,
+  Modal,
+  Stack,
+  Typography,
+} from "@mui/material";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -13,6 +21,19 @@ import { FieldValues } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { toast } from "sonner";
 import logo from "../../../assets/logo.jpg";
+import { useState } from "react";
+
+const style = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: 400,
+  bgcolor: "background.paper",
+  border: "2px solid #000",
+  boxShadow: 24,
+  p: 4,
+};
 
 const LoginPage = () => {
   const router = useRouter();
@@ -37,6 +58,11 @@ const LoginPage = () => {
       console.error(err.message);
     }
   };
+
+  // Demo modal task
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
   return (
     <Container>
       <Stack
@@ -122,9 +148,29 @@ const LoginPage = () => {
               </Button>
               <Typography component="p" fontWeight={300}>
                 <span>{"Don't have an account?"}</span>
-                <Link href="/register" className="text-red-500 ms-1">Create an account</Link>
+                <Link href="/register" className="text-red-500 ms-1">
+                  Create an account
+                </Link>
               </Typography>
             </BDForm>
+          </Box>
+          <Box sx={{marginTop: "20px"}}>
+            <Button onClick={handleOpen} variant="outlined">Test Credintial</Button>
+            <Modal
+              open={open}
+              onClose={handleClose}
+              aria-labelledby="modal-modal-title"
+              aria-describedby="modal-modal-description"
+            >
+              <Box sx={style}>
+                <Typography id="modal-modal-title" variant="h6" component="h2">
+                  Email: alim@gmail.com
+                </Typography>
+                <Typography id="modal-modal-title" variant="h6" component="h2">
+                  Password: 1234
+                </Typography>
+              </Box>
+            </Modal>
           </Box>
         </Box>
       </Stack>
