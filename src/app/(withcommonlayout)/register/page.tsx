@@ -17,6 +17,7 @@ import { useDispatch } from "react-redux";
 import { baseApi } from "@/redux/api/baseApi";
 import Image from "next/image";
 import logo from "../../../assets/logo.jpg";
+import { imageUpload } from "@/actions/imageUpload";
 
 const defaultValues = {
   name: "",
@@ -37,7 +38,8 @@ const RegisterPage = () => {
 
   const handleRegister = async (values: FieldValues) => {
     values.lastDonationDate = dateFormatter(values.lastDonationDate);
-
+    const formData = new FormData();
+    formData.append("image", values.image[0]);
     // Convert availability to boolean based on 'yes' and 'no'
     if (values.availability === "yes") {
       values.availability = true;
@@ -46,6 +48,9 @@ const RegisterPage = () => {
     }
 
     try {
+      // console.log(values.image);
+      // const imageUrl = await imageUpload(values.images);
+      // console.log(imageUrl);
       const res = await registerUser(values);
       if (res?.data?.id) {
         dispatch(baseApi.util.invalidateTags(["user", "request"]));
@@ -91,7 +96,7 @@ const RegisterPage = () => {
             }}
           >
             <Box>
-            <Image src={logo} alt="Logo" width={50} height={50} />
+              <Image src={logo} alt="Logo" width={50} height={50} />
             </Box>
             <Box>
               <Typography variant="h6" fontWeight={600}>
@@ -108,7 +113,7 @@ const RegisterPage = () => {
             >
               <Grid container spacing={2} my={1}>
                 <Grid item md={12}>
-                  <BDInput label="Name" fullWidth={true} name="name" required />
+                  <BDInput label="Name" fullWidth={true} required name="name" />
                 </Grid>
                 <Grid item md={6}>
                   <BDInput
@@ -158,11 +163,12 @@ const RegisterPage = () => {
                 <Grid item md={6}>
                   <BDInput
                     label="Image"
-                    type="text"
+                    type="file"
                     fullWidth={true}
                     name="image"
                     required
                   />
+                  {/* <input type="file" name="image" required /> */}
                 </Grid>
                 <Grid item md={6}>
                   <BDInput
@@ -218,7 +224,10 @@ const RegisterPage = () => {
                 Register
               </Button>
               <Typography component="p" fontWeight={300}>
-                Do you already have an account? <Link href="/login" className="text-red-500">Login</Link>
+                Do you already have an account?{" "}
+                <Link href="/login" className="text-red-500">
+                  Login
+                </Link>
               </Typography>
             </BDForm>
           </Box>

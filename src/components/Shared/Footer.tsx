@@ -60,17 +60,21 @@ const Footer = () => {
             <Typography variant="h6" gutterBottom>
               Additional Links
             </Typography>
-            <Link
-              href="/terms"
+            <Typography
+              // href="/"
               variant="body1"
               display="block"
-              sx={{ marginBottom: "5px" }}
+              sx={{ marginBottom: "5px", cursor: "pointer", color: "primary.main" }}
             >
               Terms of Use
-            </Link>
-            <Link href="/privacy" variant="body1" display="block">
+            </Typography>
+            <Typography
+              variant="body1"
+              display="block"
+              sx={{  cursor: "pointer", color: "primary.main" }}
+            >
               Privacy Policy
-            </Link>
+            </Typography>
           </Grid>
 
           <Grid item xs={12} md={4}>

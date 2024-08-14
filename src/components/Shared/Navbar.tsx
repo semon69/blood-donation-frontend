@@ -162,6 +162,21 @@ function Navbar() {
                       Search Donor
                     </Link>
                   </Typography>
+                  <Typography
+                    sx={{
+                      fontWeight: 600,
+                      fontSize: "18px",
+                    }}
+                  >
+                    <Link
+                      href={"/donationTips"}
+                      style={
+                        pathname === "/donationTips" ? { color: "red" } : {}
+                      }
+                    >
+                      Donation Tips
+                    </Link>
+                  </Typography>
                   {loggedIn ? (
                     <Typography>
                       <Link href={`/dashboard/${userData?.role}`}>
@@ -239,6 +254,20 @@ function Navbar() {
                     Search Donor
                   </Link>
                 </Typography>
+                <Typography
+                  className="border-b-2 border-red-600"
+                  sx={{
+                    fontWeight: 600,
+                    fontSize: "18px",
+                  }}
+                >
+                  <Link
+                    href={"/donationTips"}
+                    style={pathname === "/donationTips" ? { color: "red" } : {}}
+                  >
+                    Donation Tips
+                  </Link>
+                </Typography>
                 {loggedIn ? (
                   <Typography
                     className="border-b-2 border-red-600"
@@ -250,59 +279,58 @@ function Navbar() {
                     <Link href={`/dashboard/${data?.role}`}>My Profile</Link>
                   </Typography>
                 ) : (
-                  <Typography
-                    className="border-b-2 border-red-600"
-                    sx={{
-                      fontWeight: 600,
-                      fontSize: "18px",
-                    }}
-                  >
-                    <Link
-                      href={"/login"}
-                      style={pathname === "/login" ? { color: "red" } : {}}
-                    >
-                      Login
-                    </Link>
-                  </Typography>
+                  ""
                 )}
               </Stack>
             </Box>
-
-            <Box sx={{ flexGrow: 0 }}>
-              <Tooltip title="Profile Image">
-                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <Avatar alt="image" src={loggedIn ? userData?.image : ""} />
-                </IconButton>
-              </Tooltip>
-              <Menu
-                sx={{ mt: "45px" }}
-                id="menu-appbar"
-                anchorEl={anchorElUser}
-                anchorOrigin={{
-                  vertical: "top",
-                  horizontal: "right",
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: "top",
-                  horizontal: "right",
-                }}
-                open={Boolean(anchorElUser)}
-                onClose={handleCloseUserMenu}
-              >
-                {settings.map((setting) => (
-                  <MenuItem
-                    key={setting}
-                    //  onClick={handleCloseUserMenu}
-                    onClick={
-                      setting === "Logout" ? handleLogout : handleCloseUserMenu
-                    }
-                  >
-                    <Typography textAlign="center">{setting}</Typography>
-                  </MenuItem>
-                ))}
-              </Menu>
-            </Box>
+            {loggedIn ? (
+              <Box sx={{ flexGrow: 0 }}>
+                <Tooltip title="Profile Image">
+                  <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                    <Avatar alt="image" src={loggedIn ? userData?.image : ""} />
+                  </IconButton>
+                </Tooltip>
+                <Menu
+                  sx={{ mt: "45px" }}
+                  id="menu-appbar"
+                  anchorEl={anchorElUser}
+                  anchorOrigin={{
+                    vertical: "top",
+                    horizontal: "right",
+                  }}
+                  keepMounted
+                  transformOrigin={{
+                    vertical: "top",
+                    horizontal: "right",
+                  }}
+                  open={Boolean(anchorElUser)}
+                  onClose={handleCloseUserMenu}
+                >
+                  {settings.map((setting) => (
+                    <MenuItem
+                      key={setting}
+                      //  onClick={handleCloseUserMenu}
+                      onClick={
+                        setting === "Logout"
+                          ? handleLogout
+                          : handleCloseUserMenu
+                      }
+                    >
+                      <Typography textAlign="center">{setting}</Typography>
+                    </MenuItem>
+                  ))}
+                </Menu>
+              </Box>
+            ) : (
+              <Button>
+                <Link
+                  href={"/login"}
+                  style={pathname === "/login" ? { color: "red" } : {}}
+                >
+                  Login
+                </Link>
+              </Button>
+            )}
           </Toolbar>
         </Container>
       </AppBar>

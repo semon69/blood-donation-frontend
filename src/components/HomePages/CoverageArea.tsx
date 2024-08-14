@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import React, { useEffect } from "react";
 import {
@@ -76,7 +76,12 @@ const CoverageArea = () => {
           padding: "10px",
         }}
       >
-        <Container>
+        <Container
+          maxWidth={"lg"}
+          sx={{
+            margin: "auto",
+          }}
+        >
           <div className="my-10">
             <Grid container spacing={2}>
               {coverageAreaData.map((region) => (
@@ -108,7 +113,7 @@ const CoverageArea = () => {
                         <Image
                           src={region?.image}
                           alt="Image"
-                          width={400}
+                          width={350}
                           height={300}
                         />
                       </Box>
