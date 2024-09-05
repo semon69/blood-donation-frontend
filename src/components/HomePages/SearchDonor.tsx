@@ -25,8 +25,6 @@ const SearchDonor = () => {
 
   const { data, isLoading } = useGetAllDonorsQuery({ ...query });
 
-  //   setAvaiability(null)
-
   return (
     <Container
       sx={{
@@ -57,25 +55,12 @@ const SearchDonor = () => {
           size="medium"
           placeholder="Search donor by Name, Location, Blood Group"
         />
-        {/* <FormControl fullWidth>
-          <InputLabel id="demo-simple-select-label">Availabilty</InputLabel>
-          <Select
-            labelId="demo-simple-select-label"
-            id="demo-simple-select"
-            value={availability !== null ? String(availability) : ""}
-            onChange={handleChange}
-            placeholder="Select Availability"
-          >
-            <MenuItem value={"true"}>Yes</MenuItem>
-            <MenuItem value={"false"}>No</MenuItem>
-          </Select>
-        </FormControl> */}
       </Box>
 
       <Box>
         {isLoading ? (
           <Loading message="please wait..." />
-        ) : data?.data.length > 0 ? (
+        ) : data?.data?.length > 0 ? (
           <Box className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-7">
             {data?.data?.slice(0, 8).map((donor: any) => (
               <DonorCard key={donor?.id} donor={donor} />

@@ -91,7 +91,12 @@ function Navbar() {
                 textDecoration: "none",
               }}
             >
-              <Image src={logo} alt="image" width={50} height={50} />
+              <Image
+                src={"https://i.ibb.co/pwS2kMr/logo.jpg"}
+                alt="image"
+                width={50}
+                height={50}
+              />
             </Typography>
 
             <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
@@ -207,7 +212,12 @@ function Navbar() {
                 textDecoration: "none",
               }}
             >
-              <Image src={logo} alt="image" width={50} height={50} />
+              <Image
+                src={"https://i.ibb.co/pwS2kMr/logo.jpg"}
+                alt="image"
+                width={50}
+                height={50}
+              />
             </Typography>
             <Box
               sx={{

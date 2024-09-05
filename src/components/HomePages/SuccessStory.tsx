@@ -122,7 +122,7 @@ const SuccessStories = () => (
                 }}
               >
                 <Image
-                  src={testimonial.image}
+                  src={testimonial?.image ? testimonial?.image : "/image"}
                   width={300}
                   height={300}
                   alt="image"

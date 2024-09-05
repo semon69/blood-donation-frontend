@@ -90,7 +90,7 @@ const DonationTips = () => {
                   }}
                 >
                   <Image
-                    src={tip.image}
+                    src={tip?.image ? tip?.image : "/image"}
                     width={300}
                     height={300}
                     alt="image"

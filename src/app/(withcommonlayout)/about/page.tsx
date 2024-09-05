@@ -95,7 +95,7 @@ const About = () => {
               Meet Our Team
             </Typography>
             <Grid data-aos="fade-up" container spacing={4} justifyContent="center">
-              {teamMembers.map((member, index) => (
+              {teamMembers?.map((member, index) => (
                 // <Grid item xs={12} sm={6} md={4} key={index}>
                 //   <Box textAlign="center" p={2}>
                 //     <Avatar
@@ -135,8 +135,8 @@ const About = () => {
                       }}
                     >
                       <Avatar
-                        alt={member.name}
-                        src={member.image}
+                        alt={member?.name}
+                        src={member?.image}
                         sx={{ width: "100%", height: "100%" }}
                       />
                       {/* Social Media Overlay */}
@@ -154,37 +154,37 @@ const About = () => {
                         }}
                       >
                         <div className="flex space-x-3 text-white">
-                          {member.facebook && (
+                          {member?.facebook && (
                             <IconButton
                               color="inherit"
-                              href={member.facebook}
+                              href={member?.facebook}
                               sx={{ color: "white" }}
                             >
                               <FaFacebookF />
                             </IconButton>
                           )}
-                          {member.twitter && (
+                          {member?.twitter && (
                             <IconButton
                               color="inherit"
-                              href={member.twitter}
+                              href={member?.twitter}
                               sx={{ color: "white" }}
                             >
                               <FaTwitter />
                             </IconButton>
                           )}
-                          {member.instagram && (
+                          {member?.instagram && (
                             <IconButton
                               color="inherit"
-                              href={member.instagram}
+                              href={member?.instagram}
                               sx={{ color: "white" }}
                             >
                               <FaInstagram />
                             </IconButton>
                           )}
-                          {member.linkedin && (
+                          {member?.linkedin && (
                             <IconButton
                               color="inherit"
-                              href={member.linkedin}
+                              href={member?.linkedin}
                               sx={{ color: "white" }}
                             >
                               <FaLinkedin />

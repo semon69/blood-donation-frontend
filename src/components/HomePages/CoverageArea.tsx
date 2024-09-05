@@ -111,7 +111,7 @@ const CoverageArea = () => {
                         }}
                       >
                         <Image
-                          src={region?.image}
+                          src={region?.image ? region?.image : "/image"}
                           alt="Image"
                           width={350}
                           height={300}

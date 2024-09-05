@@ -3,7 +3,6 @@ import { Box, List, Stack, Typography } from "@mui/material";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import logo from "../../assets/logo.jpg";
 import SidebarItem from "./SidebarItem";
 import { drawerItems } from "@/utils/drawerItems";
 
@@ -29,7 +28,7 @@ const SideBar = () => {
         component={Link}
         href="/"
       >
-        <Image src={logo} width={40} height={40} alt="logo" />
+        <Image src={"https://i.ibb.co/pwS2kMr/logo.jpg"} width={40} height={40} alt="logo" />
         <Typography
           variant="h6"
           component="h1"

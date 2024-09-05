@@ -18,6 +18,7 @@ import { baseApi } from "@/redux/api/baseApi";
 import Image from "next/image";
 import logo from "../../../assets/logo.jpg";
 import { imageUpload } from "@/actions/imageUpload";
+import { imageUploader } from "@/components/utils/imageUploaderr";
 
 const defaultValues = {
   name: "",
@@ -38,8 +39,7 @@ const RegisterPage = () => {
 
   const handleRegister = async (values: FieldValues) => {
     values.lastDonationDate = dateFormatter(values.lastDonationDate);
-    const formData = new FormData();
-    formData.append("image", values.image[0]);
+
     // Convert availability to boolean based on 'yes' and 'no'
     if (values.availability === "yes") {
       values.availability = true;
@@ -48,9 +48,15 @@ const RegisterPage = () => {
     }
 
     try {
-      // console.log(values.image);
-      // const imageUrl = await imageUpload(values.images);
-      // console.log(imageUrl);
+      // upload to imgbb
+      if (values.image && values.image[0]) {
+        const imgBBResponse = await imageUploader(values.image[0]);
+        // console.log(imgBBResponse);
+
+        if (imgBBResponse) {
+          values.image = imgBBResponse.display_url;
+        }
+      }
       const res = await registerUser(values);
       if (res?.data?.id) {
         dispatch(baseApi.util.invalidateTags(["user", "request"]));
@@ -97,7 +103,7 @@ const RegisterPage = () => {
             }}
           >
             <Box>
-              <Image src={logo} alt="Logo" width={50} height={50} />
+              <Image src={"https://i.ibb.co/pwS2kMr/logo.jpg"} alt="Logo" width={50} height={50} />
             </Box>
             <Box>
               <Typography variant="h6" fontWeight={600}>
@@ -163,8 +169,8 @@ const RegisterPage = () => {
                 </Grid>
                 <Grid item md={6}>
                   <BDInput
-                    label="Image URL"
-                    type="text"
+                    // label="Image URL"
+                    type="file"
                     fullWidth={true}
                     name="image"
                     required
@@ -239,3 +245,36 @@ const RegisterPage = () => {
 };
 
 export default RegisterPage;
+
+// // upload to imgbb
+// if (productImage && productImage?.file) {
+//   const imgBBResponse = await imageUploader(productImage?.file);
+//   if (imgBBResponse) {
+//     values["productImageRequestModel"] = {
+//       imageUrl: imgBBResponse?.url,
+//       deleteImageUrl: imgBBResponse?.delete_url,
+//     };
+//   }
+// }
+
+// const handleImageChange = (e) => {
+//   const file = e.target.files[0];
+//   if (file) {
+//     const fileSizeInMB = file.size / (1024 * 1024);
+
+//     if (fileSizeInMB > 1) {
+//       toast.error("File size exceeds 1 MB. Please upload a smaller file.");
+//       return;
+//     }
+
+//     const render = new FileReader(file);
+//     render.onloadend = () => {
+//       const url = URL.createObjectURL(file);
+//       setProductImage({
+//         selectedImg: url,
+//         file: file,
+//       });
+//     };
+//     render.readAsDataURL(file);
+//   }
+// };

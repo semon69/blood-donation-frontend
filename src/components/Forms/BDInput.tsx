@@ -1,3 +1,4 @@
+// Updated BDInput Component
 import { SxProps, TextField } from "@mui/material";
 import { Controller, useFormContext } from "react-hook-form";
 
@@ -22,11 +23,12 @@ const BDInput = ({
   required,
 }: TInputProps) => {
   const { control } = useFormContext();
+
   return (
     <Controller
       control={control}
       name={name}
-      render={({ field, fieldState: { error } }) => (
+      render={({ field }) => (
         <TextField
           {...field}
           sx={{ ...sx }}
@@ -35,10 +37,21 @@ const BDInput = ({
           variant="outlined"
           size={size}
           fullWidth={fullWidth}
-          placeholder={label}
           required={required}
-          error={!!error?.message}
-          helperText={error?.message}
+          inputProps={{}} // Keep this open for all types
+          onChange={(e) => {
+            const target = e.target as HTMLInputElement;
+
+            if (type === "file") {
+              // Handle file input separately
+              field.onChange(target.files);
+              console.log("Selected files:", target.files); // Debug to ensure correct file capture
+            } else {
+              // Handle text input
+              field.onChange(target.value);
+            }
+          }}
+          value={type === "file" ? undefined : field.value}
         />
       )}
     />

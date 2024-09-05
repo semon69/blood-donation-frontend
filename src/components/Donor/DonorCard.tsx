@@ -8,6 +8,7 @@ import "aos/dist/aos.css";
 import { useEffect } from "react";
 
 export default function DonorCard({ donor }: { donor: any }) {
+
   useEffect(() => {
     AOS.init();
   }, []);
@@ -33,7 +34,7 @@ export default function DonorCard({ donor }: { donor: any }) {
           }}
         >
           <Image
-            src={donor?.image || "https://i.ibb.co/8PmDtj1/jh.jpg"}
+            src={donor?.image ? donor?.image : "https://i.ibb.co/8PmDtj1/jh.jpg"}
             width={300}
             height={300}
             alt="image"

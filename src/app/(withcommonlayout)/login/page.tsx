@@ -89,7 +89,7 @@ const LoginPage = () => {
             }}
           >
             <Box>
-              <Image src={logo} alt="Logo" width={50} height={50} />
+              <Image src={"https://i.ibb.co/pwS2kMr/logo.jpg"} alt="Logo" width={50} height={50} />
             </Box>
             <Box>
               <Typography variant="h6" fontWeight={600}>
